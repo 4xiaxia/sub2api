@@ -1,65 +1,113 @@
-# Sub2API
+# Sub2API - AI API 网关平台
 
 <div align="center">
 
-[![Go](https://img.shields.io/badge/Go-1.25.5-00ADD8.svg)](https://golang.org/)
-[![Vue](https://img.shields.io/badge/Vue-3.4+-4FC08D.svg)](https://vuejs.org/)
-[![PostgreSQL](https://img.shields.io/badge/PostgreSQL-15+-336791.svg)](https://www.postgresql.org/)
-[![Redis](https://img.shields.io/badge/Redis-7+-DC382D.svg)](https://redis.io/)
-[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED.svg)](https://www.docker.com/)
+![Sub2API](https://img.shields.io/badge/Sub2API-v1.0-blue)
+![Next.js](https://img.shields.io/badge/Next.js-16-black)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.7-blue)
+![Supabase](https://img.shields.io/badge/Supabase-PostgreSQL-green)
+![License](https://img.shields.io/badge/license-MIT-green)
 
-**AI API Gateway Platform for Subscription Quota Distribution**
+**专业的 AI API 订阅配额分发与管理系统**
 
-English | [中文](README_CN.md)
+[快速开始](./QUICKSTART.md) | [使用指南](./README_USAGE.md) | [部署指南](./DEPLOYMENT.md) | [项目状态](./PROJECT_STATUS.md)
 
 </div>
 
 ---
 
-## Demo
+## 📖 项目简介
 
-Try Sub2API online: **https://demo.sub2api.org/**
+Sub2API 是一个现代化的 AI API 网关平台，专为订阅配额分发与管理而设计。完全基于 **Next.js 16** 和 **Supabase** 构建，提供完整的 API 密钥管理、使用监控、速率限制和计费功能，适用于需要管理多个用户和 API 密钥的场景。
 
-Demo credentials (shared demo environment; **not** created automatically for self-hosted installs):
+### ✨ 核心特性
 
-| Email | Password |
-|-------|----------|
-| admin@sub2api.com | admin123 |
+- 🔐 **完整的用户认证系统** - 注册、登录、会话管理
+- 🔑 **灵活的 API 密钥管理** - 创建、管理、撤销密钥
+- 📊 **实时使用监控** - 详细的调用统计和历史记录
+- ⚡ **智能速率限制** - RPM/TPM 精准控制
+- 💰 **自动计费系统** - 基于使用量的自动扣费
+- 👥 **多用户分组** - 灵活的权限和配额分配
+- 🛡️ **企业级安全** - RLS 数据隔离、密钥加密存储
+- 🎨 **现代化 UI** - 响应式设计，优雅的用户体验
+- 🚀 **API 网关代理** - 智能请求转发和计费
+- 👨‍💼 **管理员后台** - 完整的系统管理功能
 
-## Overview
+## 🚀 快速开始
 
-Sub2API is an AI API gateway platform designed to distribute and manage API quotas from AI product subscriptions (like Claude Code $200/month). Users can access upstream AI services through platform-generated API Keys, while the platform handles authentication, billing, load balancing, and request forwarding.
+### 5 分钟部署
 
-## Features
+```bash
+# 1. 克隆项目
+git clone https://github.com/4xiaxia/sub2api.git
+cd sub2api
 
-- **Multi-Account Management** - Support multiple upstream account types (OAuth, API Key)
-- **API Key Distribution** - Generate and manage API Keys for users
-- **Precise Billing** - Token-level usage tracking and cost calculation
-- **Smart Scheduling** - Intelligent account selection with sticky sessions
-- **Concurrency Control** - Per-user and per-account concurrency limits
-- **Rate Limiting** - Configurable request and token rate limits
-- **Admin Dashboard** - Web interface for monitoring and management
+# 2. 安装依赖
+npm install
 
-## Tech Stack
+# 3. 配置环境变量（需先创建 Supabase 项目）
+# 参见下方"环境配置"部分
 
-| Component | Technology |
-|-----------|------------|
-| Backend | Go 1.25.5, Gin, Ent |
-| Frontend | Vue 3.4+, Vite 5+, TailwindCSS |
-| Database | PostgreSQL 15+ |
-| Cache/Queue | Redis 7+ |
+# 4. 启动开发服务器
+npm run dev
+
+# 5. 访问 http://localhost:3000
+```
+
+**详细步骤请查看**: [⚡ 5分钟快速开始指南](./QUICKSTART.md)
+
+## 🏗️ 技术架构
+
+### 技术栈
+
+**前端**
+- Next.js 16 (App Router)
+- React 19 + TypeScript 5.7
+- Shadcn UI + Radix UI
+- Tailwind CSS 3.4
+- SWR (数据获取和缓存)
+
+**后端**
+- Next.js API Routes
+- Supabase (PostgreSQL)
+- Supabase Auth
+- bcryptjs (密码加密)
+
+**部署**
+- Vercel (应用托管)
+- Supabase (数据库托管)
 
 ---
 
-## Documentation
+## 📚 完整文档
 
-- Dependency Security: `docs/dependency-security.md`
+- 📖 [使用指南](./README_USAGE.md) - 完整的功能说明和 API 文档
+- 🚀 [部署指南](./DEPLOYMENT.md) - 生产环境部署步骤
+- ⚡ [快速开始](./QUICKSTART.md) - 5 分钟快速部署
+- 📊 [项目状态](./PROJECT_STATUS.md) - 功能完成度和技术细节
 
 ---
 
-## Deployment
+## 🌐 环境配置
 
-### Method 1: Script Installation (Recommended)
+在部署前，需要设置以下环境变量：
+
+```bash
+# Supabase 配置（必需）
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+```
+
+### 获取 Supabase 密钥
+
+1. 访问 [Supabase](https://supabase.com) 创建项目
+2. 在项目中打开 SQL Editor 执行 `scripts/init-supabase.sql`
+3. 在 Settings → API 中获取上述密钥
+
+## 🚢 部署方式
+
+### 方法一：Vercel 部署（推荐）
 
 One-click installation script that downloads pre-built binaries from GitHub Releases.
 
